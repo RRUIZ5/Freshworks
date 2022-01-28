@@ -18,6 +18,14 @@
 		C7256E0B27A372E600EC9C4D /* FreshworksLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = C7256E0A27A372E600EC9C4D /* FreshworksLogo.png */; };
 		C7256E0F27A375AE00EC9C4D /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7256E0E27A375AE00EC9C4D /* MainTabBarController.swift */; };
 		C7256E1127A3790200EC9C4D /* TabBarElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7256E1027A3790200EC9C4D /* TabBarElement.swift */; };
+		C7256E1427A37D5B00EC9C4D /* GiphyApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7256E1327A37D5B00EC9C4D /* GiphyApi.swift */; };
+		C7256E1927A37E3D00EC9C4D /* SearchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7256E1827A37E3D00EC9C4D /* SearchRequest.swift */; };
+		C7256E1B27A37F2D00EC9C4D /* SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7256E1A27A37F2D00EC9C4D /* SearchResponse.swift */; };
+		C7256E1D27A3908600EC9C4D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7256E1C27A3908600EC9C4D /* NetworkManager.swift */; };
+		C7256E1F27A3911400EC9C4D /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7256E1E27A3911400EC9C4D /* NetworkError.swift */; };
+		C7256E2127A3A23C00EC9C4D /* GiphyApiNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7256E2027A3A23C00EC9C4D /* GiphyApiNetwork.swift */; };
+		C7256E2427A3A55400EC9C4D /* NetworkManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7256E2327A3A55400EC9C4D /* NetworkManagerTests.swift */; };
+		C7256E2627A3A58600EC9C4D /* MockURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7256E2527A3A58600EC9C4D /* MockURLProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +61,14 @@
 		C7256E0A27A372E600EC9C4D /* FreshworksLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FreshworksLogo.png; sourceTree = "<group>"; };
 		C7256E0E27A375AE00EC9C4D /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		C7256E1027A3790200EC9C4D /* TabBarElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarElement.swift; sourceTree = "<group>"; };
+		C7256E1327A37D5B00EC9C4D /* GiphyApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiphyApi.swift; sourceTree = "<group>"; };
+		C7256E1827A37E3D00EC9C4D /* SearchRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRequest.swift; sourceTree = "<group>"; };
+		C7256E1A27A37F2D00EC9C4D /* SearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResponse.swift; sourceTree = "<group>"; };
+		C7256E1C27A3908600EC9C4D /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		C7256E1E27A3911400EC9C4D /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		C7256E2027A3A23C00EC9C4D /* GiphyApiNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiphyApiNetwork.swift; sourceTree = "<group>"; };
+		C7256E2327A3A55400EC9C4D /* NetworkManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerTests.swift; sourceTree = "<group>"; };
+		C7256E2527A3A58600EC9C4D /* MockURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +119,7 @@
 		C7256DD927A361CE00EC9C4D /* Freshworks */ = {
 			isa = PBXGroup;
 			children = (
+				C7256E1227A37D4700EC9C4D /* Networking */,
 				C7256E0D27A3755100EC9C4D /* Views */,
 				C7256E0C27A3752C00EC9C4D /* Extras */,
 				C7256DE027A361CE00EC9C4D /* Main.storyboard */,
@@ -116,6 +133,7 @@
 		C7256DF027A361D000EC9C4D /* FreshworksTests */ = {
 			isa = PBXGroup;
 			children = (
+				C7256E2227A3A53600EC9C4D /* Networking */,
 				C7256DF127A361D000EC9C4D /* FreshworksTests.swift */,
 			);
 			path = FreshworksTests;
@@ -147,6 +165,52 @@
 				C7256E1027A3790200EC9C4D /* TabBarElement.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		C7256E1227A37D4700EC9C4D /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				C7256E1527A37E0100EC9C4D /* Models */,
+				C7256E1327A37D5B00EC9C4D /* GiphyApi.swift */,
+				C7256E1C27A3908600EC9C4D /* NetworkManager.swift */,
+				C7256E2027A3A23C00EC9C4D /* GiphyApiNetwork.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		C7256E1527A37E0100EC9C4D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C7256E1727A37E1D00EC9C4D /* Responses */,
+				C7256E1627A37E1700EC9C4D /* Requests */,
+				C7256E1E27A3911400EC9C4D /* NetworkError.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C7256E1627A37E1700EC9C4D /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				C7256E1827A37E3D00EC9C4D /* SearchRequest.swift */,
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
+		C7256E1727A37E1D00EC9C4D /* Responses */ = {
+			isa = PBXGroup;
+			children = (
+				C7256E1A27A37F2D00EC9C4D /* SearchResponse.swift */,
+			);
+			path = Responses;
+			sourceTree = "<group>";
+		};
+		C7256E2227A3A53600EC9C4D /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				C7256E2327A3A55400EC9C4D /* NetworkManagerTests.swift */,
+				C7256E2527A3A58600EC9C4D /* MockURLProtocol.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -281,8 +345,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7256E1B27A37F2D00EC9C4D /* SearchResponse.swift in Sources */,
 				C7256E1127A3790200EC9C4D /* TabBarElement.swift in Sources */,
+				C7256E1927A37E3D00EC9C4D /* SearchRequest.swift in Sources */,
 				C7256DDB27A361CE00EC9C4D /* AppDelegate.swift in Sources */,
+				C7256E1D27A3908600EC9C4D /* NetworkManager.swift in Sources */,
+				C7256E1427A37D5B00EC9C4D /* GiphyApi.swift in Sources */,
+				C7256E1F27A3911400EC9C4D /* NetworkError.swift in Sources */,
+				C7256E2127A3A23C00EC9C4D /* GiphyApiNetwork.swift in Sources */,
 				C7256DDD27A361CE00EC9C4D /* SceneDelegate.swift in Sources */,
 				C7256E0F27A375AE00EC9C4D /* MainTabBarController.swift in Sources */,
 			);
@@ -292,6 +362,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7256E2627A3A58600EC9C4D /* MockURLProtocol.swift in Sources */,
+				C7256E2427A3A55400EC9C4D /* NetworkManagerTests.swift in Sources */,
 				C7256DF227A361D000EC9C4D /* FreshworksTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
