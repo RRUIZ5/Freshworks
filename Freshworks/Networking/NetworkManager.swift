@@ -7,16 +7,7 @@
 
 import Foundation
 
-protocol URLConvertible {
-    var url: URL? { get }
-}
-
 class NetworkManager {
-
-    enum Method: String {
-        case get = "GET"
-        case post = "POST"
-    }
 
     private let session: URLSession
     private let decoder: JSONDecoder

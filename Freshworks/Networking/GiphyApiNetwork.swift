@@ -9,17 +9,6 @@ import Foundation
 
 class GiphyApiNetwork: GiphyApi {
 
-    enum Endpoint: String, URLConvertible {
-        static let path = "https://api.giphy.com/v1/gifs/"
-
-        case search = "search"
-        case trending = "trending"
-
-        var url: URL? {
-            URL(string: "\(GiphyApiNetwork.Endpoint.path)\(self)")
-        }
-    }
-
     // This is completely wrong
     // https://nshipster.com/secrets/
     // Doing this for the sake of finishing on time

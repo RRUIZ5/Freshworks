@@ -40,7 +40,7 @@ class MainTabBarController: UITabBarController {
         let api = GiphyApiNetwork()
         Task {
             do {
-            let response = try await api.search(query: "Zeratul")
+            let response = try await api.trending()
                 response.data.forEach { data in
                     print(data.images.original.webp)
                 }

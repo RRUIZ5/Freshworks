@@ -63,12 +63,3 @@ class NetworkManagerTests: XCTestCase {
         XCTAssertTrue(items.isEmpty)
     }
 }
-
-enum TestEndpoint: String, URLConvertible {
-    case myCoolEndpoint = "https://api.coolendpoint.com"
-    var url: URL? { URL(string: self.rawValue) }
-}
-
-struct TestModel: Codable, Equatable {
-    let name: String
-}
