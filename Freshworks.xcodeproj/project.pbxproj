@@ -9,13 +9,15 @@
 /* Begin PBXBuildFile section */
 		C7256DDB27A361CE00EC9C4D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7256DDA27A361CE00EC9C4D /* AppDelegate.swift */; };
 		C7256DDD27A361CE00EC9C4D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7256DDC27A361CE00EC9C4D /* SceneDelegate.swift */; };
-		C7256DDF27A361CE00EC9C4D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7256DDE27A361CE00EC9C4D /* ViewController.swift */; };
 		C7256DE227A361CE00EC9C4D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7256DE027A361CE00EC9C4D /* Main.storyboard */; };
 		C7256DE427A361CF00EC9C4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C7256DE327A361CF00EC9C4D /* Assets.xcassets */; };
 		C7256DE727A361CF00EC9C4D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C7256DE527A361CF00EC9C4D /* LaunchScreen.storyboard */; };
 		C7256DF227A361D000EC9C4D /* FreshworksTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7256DF127A361D000EC9C4D /* FreshworksTests.swift */; };
 		C7256DFC27A361D000EC9C4D /* FreshworksUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7256DFB27A361D000EC9C4D /* FreshworksUITests.swift */; };
 		C7256DFE27A361D000EC9C4D /* FreshworksUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7256DFD27A361D000EC9C4D /* FreshworksUITestsLaunchTests.swift */; };
+		C7256E0B27A372E600EC9C4D /* FreshworksLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = C7256E0A27A372E600EC9C4D /* FreshworksLogo.png */; };
+		C7256E0F27A375AE00EC9C4D /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7256E0E27A375AE00EC9C4D /* MainTabBarController.swift */; };
+		C7256E1127A3790200EC9C4D /* TabBarElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7256E1027A3790200EC9C4D /* TabBarElement.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,7 +41,6 @@
 		C7256DD727A361CE00EC9C4D /* Freshworks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Freshworks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7256DDA27A361CE00EC9C4D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C7256DDC27A361CE00EC9C4D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		C7256DDE27A361CE00EC9C4D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C7256DE127A361CE00EC9C4D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C7256DE327A361CF00EC9C4D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C7256DE627A361CF00EC9C4D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,6 +50,9 @@
 		C7256DF727A361D000EC9C4D /* FreshworksUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FreshworksUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7256DFB27A361D000EC9C4D /* FreshworksUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreshworksUITests.swift; sourceTree = "<group>"; };
 		C7256DFD27A361D000EC9C4D /* FreshworksUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreshworksUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		C7256E0A27A372E600EC9C4D /* FreshworksLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FreshworksLogo.png; sourceTree = "<group>"; };
+		C7256E0E27A375AE00EC9C4D /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		C7256E1027A3790200EC9C4D /* TabBarElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarElement.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,12 +103,11 @@
 		C7256DD927A361CE00EC9C4D /* Freshworks */ = {
 			isa = PBXGroup;
 			children = (
+				C7256E0D27A3755100EC9C4D /* Views */,
+				C7256E0C27A3752C00EC9C4D /* Extras */,
+				C7256DE027A361CE00EC9C4D /* Main.storyboard */,
 				C7256DDA27A361CE00EC9C4D /* AppDelegate.swift */,
 				C7256DDC27A361CE00EC9C4D /* SceneDelegate.swift */,
-				C7256DDE27A361CE00EC9C4D /* ViewController.swift */,
-				C7256DE027A361CE00EC9C4D /* Main.storyboard */,
-				C7256DE327A361CF00EC9C4D /* Assets.xcassets */,
-				C7256DE527A361CF00EC9C4D /* LaunchScreen.storyboard */,
 				C7256DE827A361CF00EC9C4D /* Info.plist */,
 			);
 			path = Freshworks;
@@ -125,6 +128,25 @@
 				C7256DFD27A361D000EC9C4D /* FreshworksUITestsLaunchTests.swift */,
 			);
 			path = FreshworksUITests;
+			sourceTree = "<group>";
+		};
+		C7256E0C27A3752C00EC9C4D /* Extras */ = {
+			isa = PBXGroup;
+			children = (
+				C7256DE527A361CF00EC9C4D /* LaunchScreen.storyboard */,
+				C7256DE327A361CF00EC9C4D /* Assets.xcassets */,
+				C7256E0A27A372E600EC9C4D /* FreshworksLogo.png */,
+			);
+			path = Extras;
+			sourceTree = "<group>";
+		};
+		C7256E0D27A3755100EC9C4D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C7256E0E27A375AE00EC9C4D /* MainTabBarController.swift */,
+				C7256E1027A3790200EC9C4D /* TabBarElement.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,6 +256,7 @@
 				C7256DE727A361CF00EC9C4D /* LaunchScreen.storyboard in Resources */,
 				C7256DE427A361CF00EC9C4D /* Assets.xcassets in Resources */,
 				C7256DE227A361CE00EC9C4D /* Main.storyboard in Resources */,
+				C7256E0B27A372E600EC9C4D /* FreshworksLogo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,9 +281,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C7256DDF27A361CE00EC9C4D /* ViewController.swift in Sources */,
+				C7256E1127A3790200EC9C4D /* TabBarElement.swift in Sources */,
 				C7256DDB27A361CE00EC9C4D /* AppDelegate.swift in Sources */,
 				C7256DDD27A361CE00EC9C4D /* SceneDelegate.swift in Sources */,
+				C7256E0F27A375AE00EC9C4D /* MainTabBarController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -446,6 +470,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -455,7 +480,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -473,6 +498,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -482,7 +508,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
