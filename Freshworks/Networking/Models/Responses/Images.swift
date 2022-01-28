@@ -8,5 +8,5 @@
 struct Images: Codable {
     let fixedHeight: FixedImage
     let fixedWidth: FixedImage
-    let original: OriginalImage
+    let downsizedMedium: FixedImage
 }

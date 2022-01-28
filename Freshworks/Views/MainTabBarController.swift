@@ -33,22 +33,6 @@ class MainTabBarController: UITabBarController {
             item.image = element.image
         }
     }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
-        let api = GiphyApiNetwork()
-        Task {
-            do {
-            let response = try await api.trending()
-                response.data.forEach { data in
-                    print(data.images.original.webp)
-                }
-            } catch {
-                print(error)
-            }
-        }
-    }
     
 
     /*

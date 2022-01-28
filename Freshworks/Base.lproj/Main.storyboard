@@ -45,18 +45,69 @@
         <!--Search-->
         <scene sceneID="8og-9e-3TS">
             <objects>
-                <viewController title="Search" id="1KZ-cB-oaD" sceneMemberID="viewController">
+                <viewController title="Search" id="1KZ-cB-oaD" customClass="SearchViewController" customModule="Freshworks" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XGP-j3-th7">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vRD-0Z-CJP">
+                                <rect key="frame" x="82" y="94" width="250" height="150"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="HJs-i7-nKm"/>
+                                    <constraint firstAttribute="height" constant="150" id="kb2-C1-CkP"/>
+                                </constraints>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QtS-0X-DmD">
+                                <rect key="frame" x="82" y="294" width="250" height="150"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="YW6-Up-jUV"/>
+                                    <constraint firstAttribute="height" constant="150" id="eBA-aT-0vU"/>
+                                </constraints>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yHr-hR-82w">
+                                <rect key="frame" x="82" y="494" width="250" height="150"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="TOo-Tq-AQD"/>
+                                    <constraint firstAttribute="width" constant="250" id="dC8-Kk-zpZ"/>
+                                </constraints>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="2mF-Zy-0vJ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="yHr-hR-82w" firstAttribute="top" secondItem="QtS-0X-DmD" secondAttribute="bottom" constant="50" id="4Cr-nH-uhy"/>
+                            <constraint firstItem="vRD-0Z-CJP" firstAttribute="top" secondItem="2mF-Zy-0vJ" secondAttribute="top" constant="50" id="HN0-7Z-XP5"/>
+                            <constraint firstItem="vRD-0Z-CJP" firstAttribute="centerX" secondItem="XGP-j3-th7" secondAttribute="centerX" id="HRO-jx-0Z3"/>
+                            <constraint firstItem="yHr-hR-82w" firstAttribute="centerX" secondItem="XGP-j3-th7" secondAttribute="centerX" id="XMq-FO-x4B"/>
+                            <constraint firstItem="QtS-0X-DmD" firstAttribute="centerX" secondItem="XGP-j3-th7" secondAttribute="centerX" id="nrU-yf-l03"/>
+                            <constraint firstItem="QtS-0X-DmD" firstAttribute="top" secondItem="vRD-0Z-CJP" secondAttribute="bottom" constant="50" id="scG-vJ-8xy"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item 1" id="tD1-QN-CDz"/>
+                    <connections>
+                        <outlet property="webView1" destination="vRD-0Z-CJP" id="khe-nX-RIY"/>
+                        <outlet property="webView2" destination="QtS-0X-DmD" id="ibY-VO-9QI"/>
+                        <outlet property="webView3" destination="yHr-hR-82w" id="Jrw-Zt-GZX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6z1-LV-LRN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1474" y="-332"/>
+            <point key="canvasLocation" x="1473.913043478261" y="-332.14285714285711"/>
         </scene>
     </scenes>
     <resources>
