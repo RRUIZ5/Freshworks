@@ -7,18 +7,18 @@
 
 class GiphyApiMock: GiphyApi {
 
-    let mockResponse: SearchResponse
+    let mockData: [GiphyData]
 
-    init(mockResponse: SearchResponse) {
-        self.mockResponse = mockResponse
+    init(mockData: [GiphyData]) {
+        self.mockData = mockData
     }
 
-    func search(query: String) async throws -> SearchResponse {
-        mockResponse
+    func search(query: String) async throws -> [GiphyData] {
+        mockData
     }
 
-    func trending() async throws -> SearchResponse {
-        mockResponse
+    func trending() async throws -> [GiphyData] {
+        mockData
     }
 
 }

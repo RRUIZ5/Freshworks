@@ -17,7 +17,7 @@ class MainTabBarController: UITabBarController {
 
     private func setUpTabBar() {
         guard let items = tabBar.items,
-        items.count >= 2 else {
+              items.count >= TabBarElement.allCases.count else {
             assert(false, "Bad storyboard set up, expecting at least 2 items")
             return
         }
@@ -33,16 +33,4 @@ class MainTabBarController: UITabBarController {
             item.image = element.image
         }
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

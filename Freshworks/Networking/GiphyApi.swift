@@ -6,6 +6,6 @@
 //
 
 protocol GiphyApi {
-    func search(query: String) async throws -> SearchResponse
-    func trending() async throws -> SearchResponse
+    func search(query: String) async throws -> [GiphyData]
+    func trending() async throws -> [GiphyData]
 }

@@ -9,7 +9,7 @@ import UIKit
 
 extension MainTabBarController {
 
-    enum TabBarElement: Int {
+    enum TabBarElement: Int, CaseIterable {
         case search = 0
         case favorites
 

@@ -7,6 +7,9 @@
 
 import UIKit
 
+typealias GifCellRegistration = UICollectionView.CellRegistration<SearchCell, GiphyData>
+typealias GifDataSource = UICollectionViewDiffableDataSource<GifSection, GiphyData>
+
 class GifCollectionViewConfiguration {
 
     let layout: GifCollectionViewLayout
@@ -15,10 +18,10 @@ class GifCollectionViewConfiguration {
         self.layout = layout
     }
 
-    func cellRegistration() -> UICollectionView.CellRegistration<SearchCell, GiphyData> {
+    func cellRegistration() -> GifCellRegistration {
         let nib = UINib(nibName: SearchCell.name, bundle: .main)
 
-        return UICollectionView.CellRegistration<SearchCell, GiphyData>(cellNib: nib) {
+        return GifCellRegistration(cellNib: nib) {
             cell, indexPath, giphyData in
 
             if let url = URL(string: giphyData.images.fixedHeight.url) {

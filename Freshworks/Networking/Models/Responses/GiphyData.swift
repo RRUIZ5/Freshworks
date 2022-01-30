@@ -6,6 +6,7 @@
 //
 
 struct GiphyData: Codable, Hashable {
+    let id: String
     let title: String
     let images: Images
 }

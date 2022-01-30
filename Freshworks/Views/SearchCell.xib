@@ -17,7 +17,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="600" height="200"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IEu-v6-Dmt">
+                    <wkWebView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IEu-v6-Dmt">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="200"/>
                         <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <wkWebViewConfiguration key="configuration">
@@ -41,20 +41,28 @@
                             <action selector="favoriteButtonTapped:" destination="gTV-IL-0wX" eventType="touchUpInside" id="ILh-3f-qdO"/>
                         </connections>
                     </button>
+                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="uEe-9f-Yub">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="200"/>
+                    </activityIndicatorView>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
+                <constraint firstItem="uEe-9f-Yub" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="CHa-WK-eV8"/>
+                <constraint firstAttribute="trailing" secondItem="uEe-9f-Yub" secondAttribute="trailing" id="Cjw-HV-dyo"/>
+                <constraint firstItem="uEe-9f-Yub" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="EjG-pe-kzH"/>
                 <constraint firstAttribute="trailing" secondItem="IEu-v6-Dmt" secondAttribute="trailing" id="HSp-Nf-6t7"/>
                 <constraint firstItem="EYJ-15-WWj" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="4" id="Mgq-g9-YEt"/>
                 <constraint firstItem="IEu-v6-Dmt" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Nfu-Nd-E3C"/>
                 <constraint firstItem="IEu-v6-Dmt" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Saw-be-Iue"/>
                 <constraint firstItem="EYJ-15-WWj" firstAttribute="trailing" secondItem="IEu-v6-Dmt" secondAttribute="trailing" id="U6o-Di-ejb"/>
                 <constraint firstAttribute="bottom" secondItem="IEu-v6-Dmt" secondAttribute="bottom" id="UbC-Vi-4Ob"/>
+                <constraint firstAttribute="bottom" secondItem="uEe-9f-Yub" secondAttribute="bottom" id="dWT-76-Dhq"/>
             </constraints>
             <size key="customSize" width="600" height="200"/>
             <connections>
                 <outlet property="favoriteButton" destination="EYJ-15-WWj" id="1vS-vV-H6m"/>
+                <outlet property="loadingView" destination="uEe-9f-Yub" id="Zkh-mL-5ta"/>
                 <outlet property="webView" destination="IEu-v6-Dmt" id="sS2-in-ACv"/>
             </connections>
             <point key="canvasLocation" x="136.23188405797103" y="132.58928571428572"/>

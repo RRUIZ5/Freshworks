@@ -17,16 +17,16 @@ class GiphyApiNetwork: GiphyApi {
 
     init() {}
 
-    func search(query: String) async throws -> SearchResponse {
+    func search(query: String) async throws -> [GiphyData] {
         try await makeSimpleRequest(endpoint: .search, with: ["q": query])
     }
 
-    func trending() async throws -> SearchResponse {
+    func trending() async throws -> [GiphyData] {
         try await makeSimpleRequest(endpoint: .trending)
     }
 
     private func makeSimpleRequest(endpoint: Endpoint,
-                                   with params: [String: String]? = nil) async throws -> SearchResponse {
+                                   with params: [String: String]? = nil) async throws -> [GiphyData] {
         var allParams = ["api_key": apiKey]
         if let params = params {
             allParams.merge(params) { selfApiKey, _ in
@@ -35,7 +35,9 @@ class GiphyApiNetwork: GiphyApi {
         }
 
         let request = try networkManager.request(for: endpoint, with: allParams, using: .get)
-        return try await networkManager.make(request: request)
+        let response: SearchResponse = try await networkManager.make(request: request)
+
+        return Array(Set(response.data))
     }
 
 }
