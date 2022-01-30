@@ -8,15 +8,6 @@
 import Foundation
 import UIKit
 
-enum GifCellAction {
-    case favorited(gif: GiphyData)
-    case unfavorited(gif: GiphyData)
-}
-
-protocol GifCellDelegate: AnyObject {
-    func performed(gifCellAction: GifCellAction)
-}
-
 class GifCellViewModel: Hashable {
 
     var request: URLRequest? { createRequest() }

@@ -31,7 +31,7 @@ class FavoritesViewController: UIViewController {
         super.viewDidLoad()
         configureCollectionView()
         configureViewModel()
-        configureSegmentedControl()
+        configureLayoutPublisher()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -64,8 +64,21 @@ class FavoritesViewController: UIViewController {
         }.store(in: &cancellables)
     }
 
-    func configureSegmentedControl() {
-        
+    private func configureLayoutPublisher() {
+        viewModel.$collectionViewConfig
+            .sink { [collectionView] config in
+                collectionView?.setCollectionViewLayout(config.collectionViewLayout(), animated: true)
+            }.store(in: &cancellables)
     }
 
+    @IBAction func segmentedControlValueChanged(_ sender: UISegmentedControl) {
+        if let segmentIndex = FavoritedSelectedIndex(rawValue: sender.selectedSegmentIndex) {
+            switch segmentIndex {
+                case .grid:
+                    viewModel.searchEvent(action: .grid)
+                case .list:
+                    viewModel.searchEvent(action: .list)
+            }
+        }
+    }
 }

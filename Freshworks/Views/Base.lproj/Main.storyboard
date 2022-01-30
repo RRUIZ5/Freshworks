@@ -67,9 +67,12 @@
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="j1G-xZ-Q4y">
                                 <rect key="frame" x="16" y="60" width="382" height="32"/>
                                 <segments>
-                                    <segment title="First"/>
-                                    <segment title="Second"/>
+                                    <segment title="Grid"/>
+                                    <segment title="List"/>
                                 </segments>
+                                <connections>
+                                    <action selector="segmentedControlValueChanged:" destination="7EK-wo-wXQ" eventType="valueChanged" id="5Zl-xz-3gn"/>
+                                </connections>
                             </segmentedControl>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="eEh-5W-ObF">
                                 <rect key="frame" x="0.0" y="99" width="414" height="714"/>

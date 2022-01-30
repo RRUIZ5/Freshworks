@@ -41,6 +41,12 @@
 		C72FD2AE27A63EA300FF0C59 /* FavoriteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72FD2AD27A63EA300FF0C59 /* FavoriteManager.swift */; };
 		C72FD2B027A656B300FF0C59 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72FD2AF27A656B300FF0C59 /* FavoritesViewController.swift */; };
 		C72FD2B227A6578200FF0C59 /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72FD2B127A6578200FF0C59 /* FavoritesViewModel.swift */; };
+		C72FD2B627A6609700FF0C59 /* FavoritesControllerAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72FD2B527A6609700FF0C59 /* FavoritesControllerAction.swift */; };
+		C72FD2B827A660B900FF0C59 /* SearchControllerAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72FD2B727A660B900FF0C59 /* SearchControllerAction.swift */; };
+		C72FD2BA27A660D900FF0C59 /* GifCellAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72FD2B927A660D900FF0C59 /* GifCellAction.swift */; };
+		C72FD2BC27A660F000FF0C59 /* GifCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72FD2BB27A660F000FF0C59 /* GifCellDelegate.swift */; };
+		C72FD2BE27A6651200FF0C59 /* GifViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72FD2BD27A6651200FF0C59 /* GifViewModel.swift */; };
+		C72FD2C027A6700200FF0C59 /* FavoritedSelectedIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72FD2BF27A6700200FF0C59 /* FavoritedSelectedIndex.swift */; };
 		C773FE8427A60A36009CD017 /* GifSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C773FE8327A60A36009CD017 /* GifSection.swift */; };
 		C773FE8627A60A5B009CD017 /* GifCollectionViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = C773FE8527A60A5B009CD017 /* GifCollectionViewConfiguration.swift */; };
 		C773FE8827A60C22009CD017 /* GifCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C773FE8727A60C22009CD017 /* GifCollectionViewLayout.swift */; };
@@ -105,6 +111,12 @@
 		C72FD2AD27A63EA300FF0C59 /* FavoriteManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteManager.swift; sourceTree = "<group>"; };
 		C72FD2AF27A656B300FF0C59 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		C72FD2B127A6578200FF0C59 /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
+		C72FD2B527A6609700FF0C59 /* FavoritesControllerAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesControllerAction.swift; sourceTree = "<group>"; };
+		C72FD2B727A660B900FF0C59 /* SearchControllerAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchControllerAction.swift; sourceTree = "<group>"; };
+		C72FD2B927A660D900FF0C59 /* GifCellAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifCellAction.swift; sourceTree = "<group>"; };
+		C72FD2BB27A660F000FF0C59 /* GifCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifCellDelegate.swift; sourceTree = "<group>"; };
+		C72FD2BD27A6651200FF0C59 /* GifViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifViewModel.swift; sourceTree = "<group>"; };
+		C72FD2BF27A6700200FF0C59 /* FavoritedSelectedIndex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritedSelectedIndex.swift; sourceTree = "<group>"; };
 		C773FE8327A60A36009CD017 /* GifSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifSection.swift; sourceTree = "<group>"; };
 		C773FE8527A60A5B009CD017 /* GifCollectionViewConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifCollectionViewConfiguration.swift; sourceTree = "<group>"; };
 		C773FE8727A60C22009CD017 /* GifCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifCollectionViewLayout.swift; sourceTree = "<group>"; };
@@ -203,13 +215,18 @@
 		C7256E0D27A3755100EC9C4D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C72FD2BF27A6700200FF0C59 /* FavoritedSelectedIndex.swift */,
+				C72FD2B527A6609700FF0C59 /* FavoritesControllerAction.swift */,
 				C72FD2AF27A656B300FF0C59 /* FavoritesViewController.swift */,
 				C7CE90B427A47FAB00FCEABE /* GifCell.swift */,
+				C72FD2B927A660D900FF0C59 /* GifCellAction.swift */,
+				C72FD2BB27A660F000FF0C59 /* GifCellDelegate.swift */,
 				C773FE8527A60A5B009CD017 /* GifCollectionViewConfiguration.swift */,
 				C773FE8727A60C22009CD017 /* GifCollectionViewLayout.swift */,
 				C773FE8327A60A36009CD017 /* GifSection.swift */,
 				C7256E0E27A375AE00EC9C4D /* MainTabBarController.swift */,
 				C72FD2A827A624E600FF0C59 /* RootViewController.swift */,
+				C72FD2B727A660B900FF0C59 /* SearchControllerAction.swift */,
 				C7CE90B227A45E5500FCEABE /* SearchViewController.swift */,
 				C7256E1027A3790200EC9C4D /* TabBarElement.swift */,
 				C7CE90B527A47FAB00FCEABE /* GifCell.xib */,
@@ -279,6 +296,7 @@
 			children = (
 				C72FD2B127A6578200FF0C59 /* FavoritesViewModel.swift */,
 				C72FD2AA27A63C2500FF0C59 /* GifCellViewModel.swift */,
+				C72FD2BD27A6651200FF0C59 /* GifViewModel.swift */,
 				C72FD2A627A6113100FF0C59 /* SearchViewModel.swift */,
 			);
 			path = ViewModels;
@@ -427,8 +445,11 @@
 			files = (
 				C72FD2B227A6578200FF0C59 /* FavoritesViewModel.swift in Sources */,
 				C7256E3827A3B71B00EC9C4D /* FixedImage.swift in Sources */,
+				C72FD2BA27A660D900FF0C59 /* GifCellAction.swift in Sources */,
 				C72FD2AB27A63C2500FF0C59 /* GifCellViewModel.swift in Sources */,
 				C72FD2B027A656B300FF0C59 /* FavoritesViewController.swift in Sources */,
+				C72FD2BC27A660F000FF0C59 /* GifCellDelegate.swift in Sources */,
+				C72FD2B827A660B900FF0C59 /* SearchControllerAction.swift in Sources */,
 				C7CE90B627A47FAB00FCEABE /* GifCell.swift in Sources */,
 				C72FD2AE27A63EA300FF0C59 /* FavoriteManager.swift in Sources */,
 				C7256E1B27A37F2D00EC9C4D /* SearchResponse.swift in Sources */,
@@ -436,6 +457,7 @@
 				C7256E2E27A3B5AA00EC9C4D /* NetworkManager+Extension.swift in Sources */,
 				C7CE90B327A45E5500FCEABE /* SearchViewController.swift in Sources */,
 				C773FE8427A60A36009CD017 /* GifSection.swift in Sources */,
+				C72FD2C027A6700200FF0C59 /* FavoritedSelectedIndex.swift in Sources */,
 				C7256E2C27A3B58E00EC9C4D /* URLConvertible.swift in Sources */,
 				C7256E3227A3B65100EC9C4D /* GiphyApiMock.swift in Sources */,
 				C7256E1927A37E3D00EC9C4D /* SearchRequest.swift in Sources */,
@@ -447,11 +469,13 @@
 				C72FD2A927A624E600FF0C59 /* RootViewController.swift in Sources */,
 				C7256E1F27A3911400EC9C4D /* NetworkError.swift in Sources */,
 				C7256E3A27A3B73100EC9C4D /* OriginalImage.swift in Sources */,
+				C72FD2BE27A6651200FF0C59 /* GifViewModel.swift in Sources */,
 				C773FE8627A60A5B009CD017 /* GifCollectionViewConfiguration.swift in Sources */,
 				C72FD2A727A6113100FF0C59 /* SearchViewModel.swift in Sources */,
 				C7256E2127A3A23C00EC9C4D /* GiphyApiNetwork.swift in Sources */,
 				C7256E3027A3B5ED00EC9C4D /* GiphyApiNetwork+Endpoint.swift in Sources */,
 				C7256E3627A3B70700EC9C4D /* Images.swift in Sources */,
+				C72FD2B627A6609700FF0C59 /* FavoritesControllerAction.swift in Sources */,
 				C7256DDD27A361CE00EC9C4D /* SceneDelegate.swift in Sources */,
 				C7256E0F27A375AE00EC9C4D /* MainTabBarController.swift in Sources */,
 			);

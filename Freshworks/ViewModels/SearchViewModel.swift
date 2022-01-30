@@ -7,20 +7,14 @@
 
 import UIKit
 
-enum SearchControllerAction {
-    case firstLoad
-    case search(query: String)
-}
-
-class SearchViewModel: GifCellDelegate {
-
-    var collectionViewLayout: UICollectionViewLayout { collectionViewConfig.collectionViewLayout() }
-    var cellRegistration: GifCellRegistration { collectionViewConfig.cellRegistration() }
+class SearchViewModel: GifViewModel {
+    
     @MainActor @Published var gifs: [GifCellViewModel] = []
 
-    private let collectionViewConfig: GifCollectionViewConfiguration
+    let collectionViewConfig: GifCollectionViewConfiguration
+    let favoriteManager: FavoriteManager
+    let removeOnUnfavorite = false
     private let giphyApi: GiphyApi
-    private let favoriteManager: FavoriteManager
     private var currentTask: Task<(), Never>?
 
     init(collectionViewConfig: GifCollectionViewConfiguration = GifCollectionViewConfiguration(layout: .list),
@@ -46,23 +40,6 @@ class SearchViewModel: GifCellDelegate {
             GifCellViewModel(gif: gif,
                              isFavorited: favoriteManager.isFavorite(gif: gif),
                              delegate: self)
-        }
-    }
-
-    @MainActor
-    private func update(gifs: [GifCellViewModel]) {
-        self.gifs = gifs
-    }
-
-    @MainActor
-    private func replace(at index: Int, with gif: GifCellViewModel) {
-        gifs[index] = gif
-    }
-
-    @MainActor
-    private func index(of gifId: String) -> Int? {
-        gifs.firstIndex { cellViewModel in
-            cellViewModel.gif.id == gifId
         }
     }
 
@@ -93,30 +70,5 @@ class SearchViewModel: GifCellDelegate {
             try await giphyApi.search(query: query)
         })
 
-    }
-
-    private func performFavorited(gif: GiphyData, favorited: Bool) {
-        Task {
-            favorited ?
-            favoriteManager.addToFavorites(gif: gif) :
-            favoriteManager.removeFromFavorites(gif: gif)
-
-            if let index = await index(of: gif.id) {
-                let cellViewModel = GifCellViewModel(gif: gif,
-                                                     isFavorited: favoriteManager.isFavorite(gif: gif),
-                                                     delegate: self)
-
-                await replace(at: index, with: cellViewModel)
-            }
-        }
-    }
-
-    func performed(gifCellAction: GifCellAction) {
-        switch gifCellAction {
-            case .favorited(let gif):
-                performFavorited(gif: gif, favorited: true)
-            case .unfavorited(let gif):
-                performFavorited(gif: gif, favorited: false)
-        }
     }
 }
