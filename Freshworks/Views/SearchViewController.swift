@@ -10,48 +10,43 @@ import WebKit
 
 class SearchViewController: UIViewController {
 
-    @IBOutlet weak var webView1: WKWebView!
-    @IBOutlet weak var webView2: WKWebView!
-    @IBOutlet weak var webView3: WKWebView!
+    @IBOutlet weak var collectionView: UICollectionView!
+    let config = GifCollectionViewConfiguration(layout: .list)
+
+    private var dataSource: UICollectionViewDiffableDataSource<GifSection, GiphyData>?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        configureCollectionView()
     }
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+    private func configureCollectionView() {
 
-        let api = GiphyApiNetwork()
+        let layout = config.collectionViewLayout()
+        collectionView.setCollectionViewLayout(layout, animated: true)
+        let cellRegistration = config.cellRegistration()
+
+        dataSource = UICollectionViewDiffableDataSource(
+            collectionView: collectionView,
+            cellProvider: { collectionView, indexPath, giphyData in
+                collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: giphyData)
+            }
+        )
+
         Task {
             do {
-                let response = try await api.trending()
-                let x = zip(response.data.prefix(3),
-                            [webView1, webView2, webView3])
+                let api = GiphyApiNetwork()
+                let data1 = try await api.trending().data
+                let data = Array(Set(data1))
+                var snapshot = NSDiffableDataSourceSnapshot<GifSection, GiphyData>()
+                snapshot.appendSections([.main])
+                snapshot.appendItems(data, toSection: .main)
 
-                x.forEach { (data, webView) in
-                    let url = URL(string: data.images.fixedWidth.url)!
-                    print(url)
-                    let request = URLRequest(url: url)
-                    webView?.load(request)
-                }
+                await dataSource?.apply(snapshot, animatingDifferences: true)
 
             } catch {
                 print(error)
             }
         }
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

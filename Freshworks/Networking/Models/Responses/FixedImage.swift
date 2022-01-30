@@ -5,7 +5,7 @@
 //  Created by Rodrigo Ruiz Murguia on 27/01/22.
 //
 
-struct FixedImage: Codable {
+struct FixedImage: Codable, Hashable {
     let url: String
     let width: String
     let height: String
