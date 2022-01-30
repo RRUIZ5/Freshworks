@@ -55,7 +55,7 @@ class SearchViewController: UIViewController {
 
     private func configureViewModel() {
         viewModel.$gifs.sink { [dataSource] gifs in
-            var snapshot = NSDiffableDataSourceSnapshot<GifSection, GiphyData>()
+            var snapshot = GifSnapshot()
             snapshot.appendSections([.main])
             snapshot.appendItems(gifs, toSection: .main)
 

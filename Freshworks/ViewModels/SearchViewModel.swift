@@ -14,21 +14,28 @@ enum SearchControllerAction {
     case unfavorited(gif: GiphyData)
 }
 
-class SearchViewModel {
+protocol SearchViewActionable: AnyObject {
+    func searchEvent(action: SearchControllerAction)
+}
+
+class SearchViewModel: SearchViewActionable {
 
     var collectionViewLayout: UICollectionViewLayout { collectionViewConfig.collectionViewLayout() }
     var cellRegistration: GifCellRegistration { collectionViewConfig.cellRegistration() }
-    @MainActor @Published var gifs: [GiphyData] = []
+    @MainActor @Published var gifs: [GifCellViewModel] = []
 
     private let collectionViewConfig: GifCollectionViewConfiguration
     private let giphyApi: GiphyApi
+    private let favoriteManager: FavoriteManager
     private var currentTask: Task<(), Never>?
 
     init(collectionViewConfig: GifCollectionViewConfiguration = GifCollectionViewConfiguration(layout: .list),
-         giphyApi: GiphyApi = GiphyApiNetwork()) {
+         giphyApi: GiphyApi = GiphyApiNetwork(),
+         favoriteManager: FavoriteManager = FavoriteManager()) {
 
         self.collectionViewConfig = collectionViewConfig
         self.giphyApi = giphyApi
+        self.favoriteManager = favoriteManager
     }
 
     func searchEvent(action: SearchControllerAction) {
@@ -38,35 +45,78 @@ class SearchViewModel {
             case .search(let query):
                 search(query: query)
             case .favorited(let gif):
-                print("User favorited", gif.title)
+                performFavorited(gif: gif, favorited: true)
             case .unfavorited(let gif):
-                print("User unfavorited", gif.title)
-
+                performFavorited(gif: gif, favorited: false)
         }
     }
 
-    func firstLoad() {
+    private func parse(gifs: [GiphyData]) -> [GifCellViewModel] {
+        gifs.map { gif in
+            GifCellViewModel(gif: gif,
+                             isFavorited: favoriteManager.isFavorite(gif: gif),
+                             delegate: self)
+        }
+    }
+
+    @MainActor
+    private func update(gifs: [GifCellViewModel]) {
+        self.gifs = gifs
+    }
+
+    @MainActor
+    private func replace(at index: Int, with gif: GifCellViewModel) {
+        gifs[index] = gif
+    }
+
+    @MainActor
+    private func index(of gifId: String) -> Int? {
+        gifs.firstIndex { cellViewModel in
+            cellViewModel.gif.id == gifId
+        }
+    }
+
+    private func performSearch(search: @escaping () async throws -> [GiphyData]) {
         currentTask = Task {
             do {
-                let gifs = try await giphyApi.trending()
-                await MainActor.run { self.gifs = gifs }
+                let data = try await search()
+                let gifs = parse(gifs: data)
+                await update(gifs: gifs)
             } catch {
                 print(error)
             }
         }
     }
 
-    func search(query: String) {
+    private func firstLoad() {
+        performSearch(search: { [giphyApi] in
+            try await giphyApi.trending()
+        })
+    }
+
+    private func search(query: String) {
         if let currentTask = currentTask {
             currentTask.cancel()
         }
 
-        currentTask = Task {
-            do {
-                let gifs = try await giphyApi.search(query: query)
-                await MainActor.run { self.gifs = gifs }
-            } catch {
-                print(error)
+        performSearch(search: { [giphyApi] in
+            try await giphyApi.search(query: query)
+        })
+
+    }
+
+    private func performFavorited(gif: GiphyData, favorited: Bool) {
+        Task {
+            favorited ?
+            favoriteManager.addToFavorites(gif: gif) :
+            favoriteManager.removeFromFavorites(gif: gif)
+
+            if let index = await index(of: gif.id) {
+                let cellViewModel = GifCellViewModel(gif: gif,
+                                                     isFavorited: favoriteManager.isFavorite(gif: gif),
+                                                     delegate: self)
+
+                await replace(at: index, with: cellViewModel)
             }
         }
     }

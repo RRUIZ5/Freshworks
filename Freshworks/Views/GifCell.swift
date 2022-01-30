@@ -8,33 +8,35 @@
 import UIKit
 import WebKit
 
-class SearchCell: UICollectionViewCell, WKNavigationDelegate {
+class GifCell: UICollectionViewCell, WKNavigationDelegate {
 
-    static let name = String(describing: SearchCell.self)
+    static let name = String(describing: GifCell.self)
 
     @IBOutlet weak var webView: WKWebView!
     @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var loadingView: UIActivityIndicatorView!
     
-    private var favorited = false
+    private var viewModel: GifCellViewModel?
 
     override func awakeFromNib() {
         super.awakeFromNib()
     }
 
-    func configure(url: URL) {
+    func configure(viewModel: GifCellViewModel) {
         guard let webView = webView else { return }
+
+        self.viewModel = viewModel
         webView.navigationDelegate = self
 
-        let request = URLRequest(url: url)
-        webView.load(request)
+        if let request = viewModel.request {
+            webView.load(request)
+        }
+        
+        favoriteButton.configuration?.background.image = viewModel.backgroundImage
     }
 
     @IBAction func favoriteButtonTapped(_ sender: Any) {
-        favorited.toggle()
-        let symbolName = favorited ? "heart.fill" : "heart"
-        let image = UIImage(systemName: symbolName)?.withRenderingMode(.alwaysOriginal)
-        favoriteButton.configuration?.background.image = image
+        viewModel?.favoritedToggled()
     }
 
     override func prepareForReuse() {
