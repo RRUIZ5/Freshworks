@@ -1,51 +1,40 @@
 //
-//  SearchViewModel.swift
+//  FavoritesViewModel.swift
 //  Freshworks
 //
 //  Created by Rodrigo Ruiz Murguia on 29/01/22.
 //
-
 import UIKit
 
-enum SearchControllerAction {
+enum FavoritesControllerAction {
     case firstLoad
-    case search(query: String)
+    case grid
+    case list
 }
 
-class SearchViewModel: GifCellDelegate {
+class FavoritesViewModel: GifCellDelegate {
 
     var collectionViewLayout: UICollectionViewLayout { collectionViewConfig.collectionViewLayout() }
     var cellRegistration: GifCellRegistration { collectionViewConfig.cellRegistration() }
     @MainActor @Published var gifs: [GifCellViewModel] = []
 
     private let collectionViewConfig: GifCollectionViewConfiguration
-    private let giphyApi: GiphyApi
     private let favoriteManager: FavoriteManager
-    private var currentTask: Task<(), Never>?
 
-    init(collectionViewConfig: GifCollectionViewConfiguration = GifCollectionViewConfiguration(layout: .list),
-         giphyApi: GiphyApi = GiphyApiNetwork(),
+    init(collectionViewConfig: GifCollectionViewConfiguration = GifCollectionViewConfiguration(layout: .grid),
          favoriteManager: FavoriteManager = FavoriteManager()) {
-
         self.collectionViewConfig = collectionViewConfig
-        self.giphyApi = giphyApi
         self.favoriteManager = favoriteManager
     }
 
-    func searchEvent(action: SearchControllerAction) {
+    func searchEvent(action: FavoritesControllerAction) {
         switch action {
             case .firstLoad:
                 firstLoad()
-            case .search(let query):
-                search(query: query)
-        }
-    }
-
-    private func parse(gifs: [GiphyData]) -> [GifCellViewModel] {
-        gifs.map { gif in
-            GifCellViewModel(gif: gif,
-                             isFavorited: favoriteManager.isFavorite(gif: gif),
-                             delegate: self)
+            case .grid:
+                print("grid")
+            case .list:
+                print("list")
         }
     }
 
@@ -66,33 +55,16 @@ class SearchViewModel: GifCellDelegate {
         }
     }
 
-    private func performSearch(search: @escaping () async throws -> [GiphyData]) {
-        currentTask = Task {
-            do {
-                let data = try await search()
-                let gifs = parse(gifs: data)
-                await update(gifs: gifs)
-            } catch {
-                print(error)
-            }
-        }
-    }
-
     private func firstLoad() {
-        performSearch(search: { [giphyApi] in
-            try await giphyApi.trending()
-        })
-    }
-
-    private func search(query: String) {
-        if let currentTask = currentTask {
-            currentTask.cancel()
+        Task {
+            let allFavorites = favoriteManager.allFavorites()
+                .map { gif in
+                    GifCellViewModel(gif: gif,
+                                     isFavorited: true,
+                                     delegate: self)
+                }
+            await update(gifs: allFavorites)
         }
-
-        performSearch(search: { [giphyApi] in
-            try await giphyApi.search(query: query)
-        })
-
     }
 
     private func performFavorited(gif: GiphyData, favorited: Bool) {
@@ -111,10 +83,11 @@ class SearchViewModel: GifCellDelegate {
         }
     }
 
+    // MARK: - GifCellDelegate conformance
     func performed(gifCellAction: GifCellAction) {
         switch gifCellAction {
-            case .favorited(let gif):
-                performFavorited(gif: gif, favorited: true)
+            case .favorited:
+                return // This case is not handled by this viewModel
             case .unfavorited(let gif):
                 performFavorited(gif: gif, favorited: false)
         }

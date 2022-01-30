@@ -21,5 +21,7 @@ class FavoriteManager {
         favorites[gif.id] != nil
     }
 
-    func allFavorites() -> [String: GiphyData] { favorites }
+    func allFavorites() -> [GiphyData] {
+        favorites.values.map { $0 }
+    }
 }

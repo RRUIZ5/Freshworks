@@ -10,8 +10,15 @@ import UIKit
 
 class RootViewController: UIViewController {
 
+    let favoriteManager = FavoriteManager()
+
     @IBSegueAction func createSearchController(_ coder: NSCoder) -> SearchViewController? {
-        let searchViewModel = SearchViewModel(collectionViewConfig: GifCollectionViewConfiguration(layout: .list))
-        return SearchViewController(viewModel: searchViewModel, coder: coder)
+        let viewModel = SearchViewModel(favoriteManager: favoriteManager)
+        return SearchViewController(viewModel: viewModel, coder: coder)
+    }
+
+    @IBSegueAction func createFavoritesController(_ coder: NSCoder) -> FavoritesViewController? {
+        let viewModel = FavoritesViewModel(favoriteManager: favoriteManager)
+        return FavoritesViewController(viewModel: viewModel, coder: coder)
     }
 }

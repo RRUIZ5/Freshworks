@@ -8,6 +8,15 @@
 import Foundation
 import UIKit
 
+enum GifCellAction {
+    case favorited(gif: GiphyData)
+    case unfavorited(gif: GiphyData)
+}
+
+protocol GifCellDelegate: AnyObject {
+    func performed(gifCellAction: GifCellAction)
+}
+
 class GifCellViewModel: Hashable {
 
     var request: URLRequest? { createRequest() }
@@ -15,20 +24,20 @@ class GifCellViewModel: Hashable {
 
     let gif: GiphyData
     private let isFavorited: Bool
-    private weak var delegate: SearchViewActionable?
+    private weak var delegate: GifCellDelegate?
 
-    init(gif: GiphyData, isFavorited: Bool, delegate: SearchViewActionable) {
+    init(gif: GiphyData, isFavorited: Bool, delegate: GifCellDelegate) {
         self.gif = gif
         self.isFavorited = isFavorited
         self.delegate = delegate
     }
 
     func favoritedToggled() {
-        let action: SearchControllerAction = isFavorited ?
+        let action: GifCellAction = isFavorited ?
             .unfavorited(gif: gif) :
             .favorited(gif: gif)
 
-        delegate?.searchEvent(action: action)
+        delegate?.performed(gifCellAction: action)
     }
 
     private func createRequest() -> URLRequest? {
