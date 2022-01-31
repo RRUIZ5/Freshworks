@@ -45,6 +45,9 @@ class GifCell: UICollectionViewCell, WKNavigationDelegate {
 
     @IBAction func favoriteButtonTapped(_ sender: Any) {
         viewModel?.favoritedToggled()
+        let workingImage = UIImage(systemName: "opticaldisc")?
+            .withRenderingMode(.alwaysOriginal)
+        favoriteButton.configuration?.background.image = workingImage
     }
 
     override func prepareForReuse() {

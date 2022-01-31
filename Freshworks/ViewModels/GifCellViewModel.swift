@@ -16,14 +16,21 @@ class GifCellViewModel: Hashable {
     let gif: GiphyData
     private let isFavorited: Bool
     private weak var delegate: GifCellDelegate?
+    private var isWorking: Bool
 
     init(gif: GiphyData, isFavorited: Bool, delegate: GifCellDelegate) {
         self.gif = gif
         self.isFavorited = isFavorited
         self.delegate = delegate
+        isWorking = false
     }
 
     func favoritedToggled() {
+
+        guard !isWorking else { return }
+
+        isWorking = true
+
         let action: GifCellAction = isFavorited ?
             .unfavorited(gif: gif) :
             .favorited(gif: gif)
