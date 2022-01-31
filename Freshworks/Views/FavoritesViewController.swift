@@ -36,7 +36,7 @@ class FavoritesViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        viewModel.searchEvent(action: .firstLoad)
+        viewModel.favoriteEvent(action: .firstLoad)
     }
 
     private func configureCollectionView() {
@@ -75,9 +75,9 @@ class FavoritesViewController: UIViewController {
         if let segmentIndex = FavoritedSelectedIndex(rawValue: sender.selectedSegmentIndex) {
             switch segmentIndex {
                 case .grid:
-                    viewModel.searchEvent(action: .grid)
+                    viewModel.favoriteEvent(action: .grid)
                 case .list:
-                    viewModel.searchEvent(action: .list)
+                    viewModel.favoriteEvent(action: .list)
             }
         }
     }

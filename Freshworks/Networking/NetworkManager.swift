@@ -23,8 +23,8 @@ class NetworkManager {
         encoder = JSONEncoder()
         encoder.keyEncodingStrategy = .convertToSnakeCase
     }
-    
-    func make<T: Decodable>(request: URLRequest) async throws -> T {
+
+    func make(request: URLRequest) async throws -> Data {
         let (data, response) = try await session.data(for: request)
 
         guard let code = (response as? HTTPURLResponse)?.statusCode,
@@ -32,6 +32,11 @@ class NetworkManager {
                   throw NetworkError(message: "Not 200 response")
               }
 
+        return data
+    }
+    
+    func make<T: Decodable>(request: URLRequest) async throws -> T {
+        let data = try await make(request: request)
         return try decoder.decode(T.self, from: data)
     }
 
@@ -42,6 +47,7 @@ class NetworkManager {
         guard let url = endpoint.url,
               var components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
                   assert(false, "Bad url, please double check")
+                  throw NetworkError(message: "Bad url")
               }
 
         let queryItems = params.map(URLQueryItem.init)

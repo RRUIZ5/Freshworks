@@ -28,8 +28,16 @@ class GifCell: UICollectionViewCell, WKNavigationDelegate {
         self.viewModel = viewModel
         webView.navigationDelegate = self
 
-        if let request = viewModel.request {
-            webView.load(request)
+        if let request = viewModel.request,
+           let url = request.url {
+
+            if url.isFileURL,
+               let data = try? Data(contentsOf: url) {
+                webView.load(data, mimeType: "image/gif", characterEncodingName: "base64", baseURL: url)
+            } else {
+                webView.load(request)
+            }
+
         }
         
         favoriteButton.configuration?.background.image = viewModel.backgroundImage

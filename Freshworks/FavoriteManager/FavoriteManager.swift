@@ -5,23 +5,11 @@
 //  Created by Rodrigo Ruiz Murguia on 29/01/22.
 //
 
-class FavoriteManager {
+import Foundation
 
-    private var favorites: [String: GiphyData] = [:]
-
-    func addToFavorites(gif: GiphyData) {
-        favorites[gif.id] = gif
-    }
-
-    func removeFromFavorites(gif: GiphyData) {
-        favorites.removeValue(forKey: gif.id)
-    }
-
-    func isFavorite(gif: GiphyData) -> Bool {
-        favorites[gif.id] != nil
-    }
-
-    func allFavorites() -> [GiphyData] {
-        favorites.values.map { $0 }
-    }
+protocol FavoriteManager {
+    func addToFavorites(gif: GiphyData) async
+    func removeFromFavorites(gif: GiphyData) async
+    func isFavorite(gif: GiphyData) async -> Bool
+    func allFavorites() async -> [GiphyData]
 }

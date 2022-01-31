@@ -22,12 +22,18 @@ extension GifViewModel {
     var collectionViewLayout: UICollectionViewLayout { collectionViewConfig.collectionViewLayout() }
     var cellRegistration: GifCellRegistration { collectionViewConfig.cellRegistration() }
 
-    func parse(gifs: [GiphyData]) -> [GifCellViewModel] {
-        gifs.map { gif in
-            GifCellViewModel(gif: gif,
-                             isFavorited: favoriteManager.isFavorite(gif: gif),
-                             delegate: self)
+    func parse(gifs: [GiphyData]) async -> [GifCellViewModel] {
+        var result: [GifCellViewModel] = []
+
+        for gif in gifs {
+            result.append(
+                GifCellViewModel(gif: gif,
+                                 isFavorited: await favoriteManager.isFavorite(gif: gif),
+                                 delegate: self)
+            )
         }
+
+        return result
     }
 
     @MainActor
@@ -52,16 +58,21 @@ extension GifViewModel {
         }
     }
 
+    @MainActor
+    func isEmpty() -> Bool {
+        gifs.isEmpty
+    }
+
     private func performFavorited(gif: GiphyData, favorited: Bool) {
         Task {
             favorited ?
-            favoriteManager.addToFavorites(gif: gif) :
-            favoriteManager.removeFromFavorites(gif: gif)
+            await favoriteManager.addToFavorites(gif: gif) :
+            await favoriteManager.removeFromFavorites(gif: gif)
 
             if let index = await index(of: gif.id) {
-                let cellViewModel = GifCellViewModel(gif: gif,
-                                                     isFavorited: favoriteManager.isFavorite(gif: gif),
-                                                     delegate: self)
+                let cellViewModel = await GifCellViewModel(gif: gif,
+                                                           isFavorited: favoriteManager.isFavorite(gif: gif),
+                                                           delegate: self)
 
                 removeOnUnfavorite ?
                 await remove(at: index) :

@@ -16,12 +16,13 @@ class FavoritesViewModel: GifViewModel {
     let favoriteManager: FavoriteManager
 
     init(collectionViewConfig: GifCollectionViewConfiguration = GifCollectionViewConfiguration(layout: .grid),
-         favoriteManager: FavoriteManager = FavoriteManager()) {
+         favoriteManager: FavoriteManager = DiskFavoriteManager(networkManager: NetworkManager())) {
         self.collectionViewConfig = collectionViewConfig
         self.favoriteManager = favoriteManager
     }
 
-    func searchEvent(action: FavoritesControllerAction) {
+    @MainActor
+    func favoriteEvent(action: FavoritesControllerAction) {
         switch action {
             case .firstLoad:
                 firstLoad()
@@ -34,7 +35,7 @@ class FavoritesViewModel: GifViewModel {
 
     private func firstLoad() {
         Task {
-            let allFavorites = favoriteManager.allFavorites()
+            let allFavorites = await favoriteManager.allFavorites()
                 .map { gif in
                     GifCellViewModel(gif: gif,
                                      isFavorited: true,

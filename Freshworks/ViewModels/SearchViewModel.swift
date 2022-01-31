@@ -19,13 +19,14 @@ class SearchViewModel: GifViewModel {
 
     init(collectionViewConfig: GifCollectionViewConfiguration = GifCollectionViewConfiguration(layout: .list),
          giphyApi: GiphyApi = GiphyApiNetwork(),
-         favoriteManager: FavoriteManager = FavoriteManager()) {
+         favoriteManager: FavoriteManager = DiskFavoriteManager(networkManager: NetworkManager())) {
 
         self.collectionViewConfig = collectionViewConfig
         self.giphyApi = giphyApi
         self.favoriteManager = favoriteManager
     }
 
+    @MainActor
     func searchEvent(action: SearchControllerAction) {
         switch action {
             case .firstLoad:
@@ -35,19 +36,11 @@ class SearchViewModel: GifViewModel {
         }
     }
 
-    private func parse(gifs: [GiphyData]) -> [GifCellViewModel] {
-        gifs.map { gif in
-            GifCellViewModel(gif: gif,
-                             isFavorited: favoriteManager.isFavorite(gif: gif),
-                             delegate: self)
-        }
-    }
-
     private func performSearch(search: @escaping () async throws -> [GiphyData]) {
         currentTask = Task {
             do {
                 let data = try await search()
-                let gifs = parse(gifs: data)
+                let gifs = await parse(gifs: data)
                 await update(gifs: gifs)
             } catch {
                 print(error)
@@ -56,9 +49,13 @@ class SearchViewModel: GifViewModel {
     }
 
     private func firstLoad() {
-        performSearch(search: { [giphyApi] in
-            try await giphyApi.trending()
-        })
+        Task {
+            guard await isEmpty() else { return }
+
+            performSearch(search: { [giphyApi] in
+                try await giphyApi.trending()
+            })
+        }
     }
 
     private func search(query: String) {

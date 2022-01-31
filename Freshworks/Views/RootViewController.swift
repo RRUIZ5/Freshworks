@@ -10,7 +10,8 @@ import UIKit
 
 class RootViewController: UIViewController {
 
-    let favoriteManager = FavoriteManager()
+    let favoriteManager = DiskFavoriteManager(networkManager: NetworkManager())
+//    let favoriteManager = MemoryFavoriteManager()
 
     @IBSegueAction func createSearchController(_ coder: NSCoder) -> SearchViewController? {
         let viewModel = SearchViewModel(favoriteManager: favoriteManager)
