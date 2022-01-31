@@ -5,6 +5,7 @@
 //  Created by Rodrigo Ruiz Murguia on 29/01/22.
 //
 
+import Combine
 import UIKit
 
 class FavoritesViewModel: GifViewModel {
@@ -14,11 +15,13 @@ class FavoritesViewModel: GifViewModel {
     @Published var collectionViewConfig: GifCollectionViewConfiguration
     
     let favoriteManager: FavoriteManager
+    var cancellables: Set<AnyCancellable> = []
 
     init(collectionViewConfig: GifCollectionViewConfiguration = GifCollectionViewConfiguration(layout: .grid),
          favoriteManager: FavoriteManager = DiskFavoriteManager(networkManager: NetworkManager())) {
         self.collectionViewConfig = collectionViewConfig
         self.favoriteManager = favoriteManager
+        configureFavoriteManagerPublisher()
     }
 
     @MainActor

@@ -5,13 +5,26 @@
 //  Created by Rodrigo Ruiz Murguia on 30/01/22.
 //
 
+import Combine
 import Foundation
 
+enum FavoriteManagerAction {
+    case favorited(id: String)
+    case unfavorited(id: String)
+}
+
 actor DiskFavoriteManager: FavoriteManager {
+
+    nonisolated var actionPublisher: AnyPublisher<FavoriteManagerAction, Never> {
+        publisher.eraseToAnyPublisher()
+    }
+
+    let publisher = PassthroughSubject<FavoriteManagerAction, Never>()
 
     private let networkManager: NetworkManager
     private let base: URL
     private let indexPath = "index"
+
     private var favorites: [String: GiphyData] {
         didSet { writeFavoritesIndex() }
     }
@@ -49,7 +62,7 @@ actor DiskFavoriteManager: FavoriteManager {
 
                     let relativePath = "\(downloadedGif.id)\(downloadedGif.type)"
                     let diskUrl = base.appendingPathComponent(relativePath)
-                    try downloadedGif.data.write(to: diskUrl, options: .atomic)
+                    try downloadedGif.data.write(to: diskUrl)
 //                    print(diskUrl)
 
                     return WrittenGif(type: downloadedGif.type, url: diskUrl)
@@ -63,6 +76,7 @@ actor DiskFavoriteManager: FavoriteManager {
             }
 
             favorites[savedGif.id] = savedGif
+            publisher.send(.favorited(id: savedGif.id))
         } catch {
             print(error)
         }
@@ -84,6 +98,7 @@ actor DiskFavoriteManager: FavoriteManager {
                 try FileManager.default.removeItem(at: url)
             }
             favorites.removeValue(forKey: gif.id)
+            publisher.send(.unfavorited(id: gif.id))
         }
     }
 

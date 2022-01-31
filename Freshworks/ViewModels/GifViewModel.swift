@@ -5,6 +5,7 @@
 //  Created by Rodrigo Ruiz Murguia on 30/01/22.
 //
 
+import Combine
 import UIKit
 
 protocol GifViewModel: GifCellDelegate {
@@ -14,6 +15,7 @@ protocol GifViewModel: GifCellDelegate {
     var collectionViewConfig: GifCollectionViewConfiguration { get }
     var favoriteManager: FavoriteManager { get }
     var removeOnUnfavorite: Bool { get }
+    var cancellables: Set<AnyCancellable> { get set }
 
 }
 
@@ -68,17 +70,35 @@ extension GifViewModel {
             favorited ?
             await favoriteManager.addToFavorites(gif: gif) :
             await favoriteManager.removeFromFavorites(gif: gif)
+        }
+    }
 
-            if let index = await index(of: gif.id) {
+    private func updateFavoritedStatus(id: String) {
+        Task {
+            if let index = await index(of: id) {
+                let gif = await gifs[index].gif
                 let cellViewModel = await GifCellViewModel(gif: gif,
                                                            isFavorited: favoriteManager.isFavorite(gif: gif),
                                                            delegate: self)
 
                 removeOnUnfavorite ?
-                await remove(at: index) :
-                await replace(at: index, with: cellViewModel)
+                await remove(at: index) : // Removes item from collection view
+                await replace(at: index, with: cellViewModel) // Updates item with new status
             }
         }
+    }
+
+    func configureFavoriteManagerPublisher() {
+        favoriteManager.actionPublisher
+            .sink { [weak self] action in
+
+                guard let self = self else { return }
+
+                switch action {
+                    case .favorited(id: let id), .unfavorited(id: let id):
+                        self.updateFavoritedStatus(id: id)
+                }
+            }.store(in: &cancellables)
     }
 
     // MARK: - GifCellDelegate conformance

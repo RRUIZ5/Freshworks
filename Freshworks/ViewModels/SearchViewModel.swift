@@ -5,6 +5,7 @@
 //  Created by Rodrigo Ruiz Murguia on 29/01/22.
 //
 
+import Combine
 import UIKit
 
 class SearchViewModel: GifViewModel {
@@ -16,6 +17,7 @@ class SearchViewModel: GifViewModel {
     let removeOnUnfavorite = false
     private let giphyApi: GiphyApi
     private var currentTask: Task<(), Never>?
+    var cancellables: Set<AnyCancellable> = []
 
     init(collectionViewConfig: GifCollectionViewConfiguration = GifCollectionViewConfiguration(layout: .list),
          giphyApi: GiphyApi = GiphyApiNetwork(),
@@ -24,6 +26,7 @@ class SearchViewModel: GifViewModel {
         self.collectionViewConfig = collectionViewConfig
         self.giphyApi = giphyApi
         self.favoriteManager = favoriteManager
+        configureFavoriteManagerPublisher()
     }
 
     @MainActor
