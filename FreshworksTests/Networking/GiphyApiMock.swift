@@ -5,6 +5,8 @@
 //  Created by Rodrigo Ruiz Murguia on 27/01/22.
 //
 
+@testable import Freshworks
+
 class GiphyApiMock: GiphyApi {
 
     let mockData: [GiphyData]
